@@ -46,6 +46,14 @@ def main(args):
                                             target_transform=target_transform, is_training=True)
         val_dataset = COCOObjectDetection(root_dir=args.data_path, transform=val_transform, target_transform=target_transform, is_training=False)
         num_classes = len(COCO_CLASS_LIST)
+    elif args.dataset == 'custom' :
+        from data_loader.detection.custom import CustomDataset, CUSTOM_CLASS_LIST
+        train_dataset = CustomDataset(trainset_dir = args.data_path, trainsform=train_transform,
+                                      target_transform = target_transform,
+                                      is_training=True)
+        val_dataset = CustomDataset(valset_dir = args.data_path, transform=train_transform,
+                                      target_transform=target_transform, is_training=False)
+        num_classes = len(CUSTOM_CLASS_LIST)
     else:
         print_error_message('{} dataset is not supported yet'.format(args.dataset))
         exit()
