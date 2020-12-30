@@ -46,12 +46,14 @@ def main(args):
                                             target_transform=target_transform, is_training=True)
         val_dataset = COCOObjectDetection(root_dir=args.data_path, transform=val_transform, target_transform=target_transform, is_training=False)
         num_classes = len(COCO_CLASS_LIST)
+    
+    # custom version
     elif args.dataset == 'custom' :
         from data_loader.detection.custom import CustomDataset, CUSTOM_CLASS_LIST
-        train_dataset = CustomDataset(trainset_dir = args.data_path, trainsform=train_transform,
+        train_dataset = CustomDataset(trainset_dir = args.train_data_path, trainsform=train_transform,
                                       target_transform = target_transform,
                                       is_training=True)
-        val_dataset = CustomDataset(valset_dir = args.data_path, transform=train_transform,
+        val_dataset = CustomDataset(valset_dir = args.val_data_path, transform=train_transform,
                                       target_transform=target_transform, is_training=False)
         num_classes = len(CUSTOM_CLASS_LIST)
     else:
@@ -206,6 +208,10 @@ if __name__ == '__main__':
     parser.add_argument('--save', default='results_detection', type=str, help='results path')
     parser.add_argument('--dataset', default='pascal', choices=detection_datasets, help='Name of the dataset')
     parser.add_argument('--data-path', default='', help='Dataset path')
+
+    parser.add_argument('--train-data-path', default='', help='Custom Train Dataset path')
+    parser.add_argument('--val-data-path', default='', help='Custom Validation Dataset path')
+
 
     #### OPTIMIZER related settings
     parser.add_argument('--momentum', default=0.9, type=float, help='Momentum value for optim')
