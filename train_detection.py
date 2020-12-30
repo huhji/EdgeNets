@@ -229,8 +229,8 @@ if __name__ == '__main__':
                         help='steps at which lr should be decreased. Only used for Cyclic and Fixed LR')
 
     # general training parameters
-    parser.add_argument('--batch-size', type=int, default=32, help='Batch size')
-    parser.add_argument('--workers', type=int, default=4, help='Number of workers for laoding data')
+    parser.add_argument('--batch-size', type=int, default=128, help='Batch size')
+    parser.add_argument('--workers', type=int, default=16, help='Number of workers for laoding data')
     parser.add_argument('--epochs', default=240, type=int, help='Max number of epochs')
     parser.add_argument('--weights', default='', type=str, help='Location of pretrained weights')
     parser.add_argument('--im-size', default=300, type=int, help='Image size for training')
